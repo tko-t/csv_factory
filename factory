@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.require
+
+require_relative 'app/csv_generator'
+
+opts = Optimist::options do
+  version '0.0.1'
+  banner <<~USAGE
+    Usage:
+           factory <name> +[options] 
+    where [options] are:
+    USAGE
+  opt :row_count, 'default: 10',             short: :r, type: :integer
+  opt :file,      'default: "rollout.csv"',  short: :f, type: :string
+  opt :header,    'default: true',           short: :H, type: :boolean
+  opt :separator, 'default: ","',            short: :s, type: :string
+  opt :quotes,    'default: false',          short: :q, type: :boolean
+  opt :overwrite, 'config overwrite(JSON)',  short: :o, type: :string
+end
+
+options = {}
+options[:file]      = opts.file if opts.file
+options[:row_count] = opts.row_count if opts.row_count
+options[:separator] = opts.separator if opts.separator
+options[:header]    = opts.header unless opts.header.nil?
+options[:quotes]    = opts.quotes unless opts.quotes.nil?
+
+options.merge!(JSON.parse(opts.overwrite || '{}', symbolize_names: true))
+
+Faker::Config.locale = :ja
+
+CsvGenerator.run(ARGV[0], **options)

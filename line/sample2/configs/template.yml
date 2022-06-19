@@ -1,0 +1,23 @@
+filename: sample2.csv
+start_id: 1
+row_count: 10
+header: true
+quotes: false
+
+columns:
+  id: ID
+  name: Name
+  address: Address
+  birthday: Birthday
+  age: Age
+rows:
+  - id: 100
+    name: 山田
+    address: 北海道
+    birthday: "2021-01-01"
+    age: 1
+  - id: 101
+    name: 田中
+    address: さいたま
+    birthday: "2019-08-29"
+    age: 3

@@ -1,0 +1,6 @@
+filename: template.csv # ../csv/template.csv
+start_id: 1            # column#_id => 1, 2, 3, 4, 5.....
+row_count: 10
+header: true
+separator: ","
+quotes: false

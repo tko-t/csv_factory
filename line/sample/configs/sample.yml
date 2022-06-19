@@ -1,0 +1,6 @@
+start_id: 1
+row_count: 10
+filename: sample.csv
+header: true
+separator: ","
+quotes: true
