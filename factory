@@ -9,7 +9,9 @@ opts = Optimist::options do
   version '0.0.1'
   banner <<~USAGE
     Usage:
-           factory <name> +[options] 
+      1. new <name>
+      2. edit line/<name/...
+      3. factory <name> +[options] # <= Now here
     where [options] are:
     USAGE
   opt :row_count, 'default: 10',             short: :r, type: :integer
@@ -18,6 +20,9 @@ opts = Optimist::options do
   opt :separator, 'default: ","',            short: :s, type: :string
   opt :quotes,    'default: false',          short: :q, type: :boolean
   opt :overwrite, 'config overwrite(JSON)',  short: :o, type: :string
+  opt :bom,       'With BOM',                short: :b, type: :boolean
+  opt :shift_jis, 'Output with shift_jis',   short: :S, type: :boolean
+  opt :win31j,    'Output with Windows31J',  short: :W, type: :boolean
 end
 
 options = {}
@@ -26,6 +31,9 @@ options[:row_count] = opts.row_count if opts.row_count
 options[:separator] = opts.separator if opts.separator
 options[:header]    = opts.header unless opts.header.nil?
 options[:quotes]    = opts.quotes unless opts.quotes.nil?
+options[:bom]       = opts.bom unless opts.bom.nil?
+options[:shift_jis] = opts.shift_jis if opts.shift_jis
+options[:win31j]    = opts.win31j if opts.win31j
 
 options.merge!(JSON.parse(opts.overwrite || '{}', symbolize_names: true))
 

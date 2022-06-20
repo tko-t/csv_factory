@@ -39,46 +39,39 @@ line/foo_bar
 └── row.rb
 
 2 directories, 5 files
+
+$ cat line/foo_bar/csv/FooBar.csv
+ID,Name
+1,山下 大輔
+2,石田 芽衣
+3,増田 優
+4,野口 一輝
+5,木下 愛
+6,後藤 翼
+7,村田 優
+8,武田 隼人
+9,森 直樹
+10,増田 航
 ```
 
 ### help
 
 ```sh
 $ docker-compose run app factory -h
-
 Usage:
-       factory <name> +[options]
+  1. new <name>
+  2. edit line/<name/...
+  3. factory <name> +[options] # <= Now here
 where [options] are:
-  -r, --row-count=<i>    出力行数
-  -f, --file=<s>         出力ファイル名
-  -H, --header           ヘッダーの要否
-  -s, --separator=<s>    区切り文字(default ",")
-  -q, --quotes           全フィールドをクオート
-  -o, --overwrite=<s>    config上書パラメータ(JSON)
+  -r, --row-count=<i>    default: 10
+  -f, --file=<s>         default: "rollout.csv"
+  -H, --header           default: true
+  -s, --separator=<s>    default: ","
+  -q, --quotes           default: false
+  -o, --overwrite=<s>    config overwrite(JSON)
+  -b, --bom              With BOM
+  -S, --shift-jis        Output with shift_jis
+  -W, --win31j           Output with Windows31J
   -v, --version          Print version and exit
   -h, --help             Show this message
 ```
-
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

@@ -10,6 +10,8 @@ class CsvGenerator
 
   attr_reader :param, :rows, :name
 
+  BOM = "\uFEFF"
+
   def self.run(name, **options)
     requires(name) # 関連モジュールのロード
 
@@ -66,6 +68,13 @@ class CsvGenerator
     self
   end
 
+  def encoding
+    return Encoding::SHIFT_JIS if param.include?(:shift_jis)
+    return Encoding::WINDOWS_31J if param.include?(:win31j)
+
+    Encoding::UTF_8
+  end
+
   # 必須のキーがなければデフォルト値をセット
   def set_default
     param.merge!({ header: true }) unless param.include?(:header)
@@ -74,6 +83,8 @@ class CsvGenerator
     param.merge!({ start_id: 0 }) unless param.include?(:start_id)
     param.merge!({ separator: ',' }) unless param.include?(:separator)
     param.merge!({ quotes: false }) unless param.include?(:quotes)
+    param.merge!({ bom: false }) unless param.include?(:bom)
+    param.merge!({ encoding: encoding }) unless param.include?(:encoding)
 
     self
   end
@@ -102,7 +113,11 @@ class CsvGenerator
   end
 
   def generate
-    CSV.open(output_path, 'wb', col_sep: param.separator, force_quotes: param.quotes) do |csv|
+    File.open(output_path, 'w', encoding: param.encoding, liberal_parsing: true, invalid: :replace, undef: :replace, replace: "?") do |f|
+      f.write BOM if param.bom
+
+      csv = CSV.new(f, force_quotes: param.quotes, col_sep: param.separator)
+
       csv << headers if param.header
 
       rows.each do |row|
