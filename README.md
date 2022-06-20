@@ -60,14 +60,14 @@ ID,Name
 $ docker-compose run app factory -h
 Usage:
   1. new <name>
-  2. edit line/<name/...
+  2. edit line/<name>/...
   3. factory <name> +[options] # <= Now here
 where [options] are:
-  -r, --row-count=<i>    default: 10
+  -c, --row-count=<i>    default: 10
   -f, --file=<s>         default: "rollout.csv"
-  -H, --header           default: true
+  -H, --header=<s>       default: "true"
   -s, --separator=<s>    default: ","
-  -q, --quotes           default: false
+  -q, --quotes=<s>       default: "false"
   -o, --overwrite=<s>    config overwrite(JSON)
   -b, --bom              With BOM
   -S, --shift-jis        Output with shift_jis
