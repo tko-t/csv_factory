@@ -30,19 +30,19 @@ class CsvGenerator
 
   # moduleを片っ端から実装
   def self.implementation(name)
-    "#{name.classify}::Generator".tap do |generator|
+    "#{name.camelize}::Generator".tap do |generator|
       prepend(generator.constantize) if generator.safe_constantize
     end
 
-    "#{name.classify}::Exp".tap do |exp|
+    "#{name.camelize}::Exp".tap do |exp|
       Exp.prepend(exp.constantize) if exp.safe_constantize
     end
 
-    "#{name.classify}::Row".tap do |row|
+    "#{name.camelize}::Row".tap do |row|
       Row.prepend(row.constantize) if row.safe_constantize
     end
 
-    "#{name.classify}::Column".tap do |column|
+    "#{name.camelize}::Column".tap do |column|
       Column.prepend(column.constantize) if column.safe_constantize
     end
   end
