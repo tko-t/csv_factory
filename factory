@@ -10,33 +10,37 @@ opts = Optimist::options do
   banner <<~USAGE
     Usage:
       1. new <name>
-      2. edit line/<name/...
+      2. edit line/<name>/...
       3. factory <name> +[options] # <= Now here
+
+    Currently available <name>:
+    #{Dir.glob('line/*').map{|path| ['  ', File.basename(path)].join }.join("\n") }
+
     where [options] are:
     USAGE
-  opt :row_count, 'default: 10',             short: :r, type: :integer
-  opt :file,      'default: "rollout.csv"',  short: :f, type: :string
-  opt :header,    'default: true',           short: :H, type: :boolean
-  opt :separator, 'default: ","',            short: :s, type: :string
-  opt :quotes,    'default: false',          short: :q, type: :boolean
-  opt :overwrite, 'config overwrite(JSON)',  short: :o, type: :string
-  opt :bom,       'With BOM',                short: :b, type: :boolean
-  opt :shift_jis, 'Output with shift_jis',   short: :S, type: :boolean
-  opt :win31j,    'Output with Windows31J',  short: :W, type: :boolean
+  opt :row_count,  'default: 10',            short: :c, type: :integer
+  opt :file,       'default: "<name>.csv"',  short: :f, type: :string
+  opt :header,     'default: "true"',        short: :H, type: :string
+  opt :separator,  'default: ","',           short: :s, type: :string
+  opt :quotes,     'default: "false"',       short: :q, type: :string
+  opt :config,     'overwrite config(JSON)', short: :o, type: :string
+  opt :bom,        'With BOM',               short: :b, type: :boolean
+  opt :shift_jis,  'Output with shift_jis',  short: :S, type: :boolean
+  opt :windows31j, 'Output with Windows31J', short: :W, type: :boolean
 end
 
 options = {}
-options[:file]      = opts.file if opts.file
-options[:row_count] = opts.row_count if opts.row_count
-options[:separator] = opts.separator if opts.separator
-options[:header]    = opts.header unless opts.header.nil?
-options[:quotes]    = opts.quotes unless opts.quotes.nil?
-options[:bom]       = opts.bom unless opts.bom.nil?
-options[:shift_jis] = opts.shift_jis if opts.shift_jis
-options[:win31j]    = opts.win31j if opts.win31j
+options[:file]       = opts.file if opts.file_given
+options[:row_count]  = opts.row_count if opts.row_count_given
+options[:separator]  = opts.separator if opts.separator_given
+options[:header]     = { true: true, false: false }[opts.header.to_sym] if opts.header_given
+options[:quotes]     = { true: true, false: false }[opts.quotes.to_sym] if opts.quotes_given
+options[:bom]        = opts.bom if opts.bom_given
+options[:shift_jis]  = opts.shift_jis if opts.shift_jis_given
+options[:windows31j] = opts.windows31j if opts.windows31j_given
 
-options.merge!(JSON.parse(opts.overwrite || '{}', symbolize_names: true))
+options.merge!(JSON.parse(opts.config || '{}', symbolize_names: true))
 
 Faker::Config.locale = :ja
 
-CsvGenerator.run(ARGV[0], **options)
+CsvGenerator.run(ARGV[0].split("/").last, **options)
