@@ -1,11 +1,11 @@
-# exps(extra parameters)が返すハッシュオブジェクトはparamに取り込まれます
+# dynamic_parameters(extra parameters)が返すハッシュオブジェクトはparamに取り込まれます
 #
 # Props
 #   param config, args を含んだParamが使用できる
 require 'active_record'
 
 module ImportCo
-  module Exp
+  module DynamicParameter
     def initialize
       super
       connection
@@ -80,7 +80,7 @@ module ImportCo
       param.unit_tax_price * param.quantity * param.item_count
     end
 
-    def exps
+    def dynamic_parameters
       {
         user:,
         receive_user:,

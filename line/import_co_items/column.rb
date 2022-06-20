@@ -4,7 +4,7 @@
 #   _header   header label
 #   _key      column key
 #   _render   render proc
-#   _param    Includes all of config, exp, args
+#   _param    Includes all of config, dynamic_parameter, args
 module ImportCoItems
   module Column
 

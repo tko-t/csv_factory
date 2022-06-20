@@ -19,7 +19,7 @@ line/foo_bar
 ├── column.rb
 ├── configs
 │   └── template.yml
-├── exp.rb
+├── dynamic_parameter.rb
 └── row.rb
 
 2 directories, 5 files
@@ -35,7 +35,7 @@ line/foo_bar
 │   └── template.yml
 ├── csv
 │   └── FooBar.csv   <= new!
-├── exp.rb
+├── dynamic_parameter.rb
 └── row.rb
 
 2 directories, 5 files

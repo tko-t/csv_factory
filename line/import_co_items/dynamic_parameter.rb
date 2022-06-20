@@ -1,10 +1,10 @@
-# expsが返すハッシュオブジェクトはparamに取り込まれます
+# dynamic_parametersが返すハッシュオブジェクトはparamに取り込まれます
 #
 # Props
 #   param config, args を含んだParamが使用できる
 require 'active_record'
 module ImportCoItems
-  module Exp
+  module DynamicParameter
     def initialize
       super
       connection
@@ -55,7 +55,7 @@ module ImportCoItems
       all(:edi_client_category_masters, cond('client_id = ?', send_client[:id]))
     end
 
-    def exps
+    def dynamic_parameters
       {
         user:,
         send_client:,
