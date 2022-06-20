@@ -1,0 +1,32 @@
+filename: import_co_item.csv # ../csv/CoItems.csv
+start_id: 1            # column#_id => 1, 2, 3, 4, 5.....
+row_count: 1000
+header: true
+separator: ","
+quotes: false
+
+item_count: 100
+co_count: 10
+send_number_prefix: AT_S_CO_NUM
+receive_number_prefix: AT_R_CO_NUM
+start_send_number: 1
+
+quantity: 100
+unit_price: 100
+unit_tax_price: 10
+unit_price_with_tax: 110
+total_price: 10000
+total_price_with_tax: 11000
+total_tax_price: 1000
+group: インポート
+
+user_id: 1
+
+database:
+  adapter: mysql2
+  database: andpad_edi_development
+  host: host.docker.internal
+  username: root
+  password: root_password
+  port: 3306
+
