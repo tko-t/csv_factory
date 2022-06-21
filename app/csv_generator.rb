@@ -106,7 +106,7 @@ class CsvGenerator
   end
 
   def output_path
-    path = File.join(File.expand_path('..', __dir__), 'line', name, 'csv')
+    path = File.join(File.expand_path('..', __dir__), 'csv', name)
     FileUtils.mkdir_p(path)
 
     File.join(path, param.filename)

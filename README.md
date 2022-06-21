@@ -26,17 +26,12 @@ line/foo_bar
 * 定義したCSVを出力する
 ```sh
 $ docker-compose run --rm app factory foo_bar
-$ tree line/foo_bar
-line/foo_bar
-├── column.rb
-├── configs
-│   └── config.yml
-├── csv
-│   └── FooBar.csv   <= new!
-├── exp.rb
-└── row.rb
+$ tree csv
+csv
+└── foo_bar
+    └── foo_bar.csv <= new!
 
-$ cat line/foo_bar/csv/FooBar.csv
+$ cat csv/foo_bar/foo_bar.csv
 ID,Name
 1,山下 大輔
 2,石田 芽衣

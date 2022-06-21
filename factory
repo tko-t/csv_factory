@@ -17,7 +17,7 @@ opts = Optimist::options do
     #{Dir.glob('line/*').map{|path| ['  ', File.basename(path)].join }.join("\n") }
 
     where [options] are:
-    USAGE
+  USAGE
   opt :row_count,  'default: 10',            short: :c, type: :integer
   opt :file,       'default: "<name>.csv"',  short: :f, type: :string
   opt :header,     'default: "true"',        short: :H, type: :string
