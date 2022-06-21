@@ -1,6 +1,6 @@
 module Sample2
-  module Exp
-    def exps
+  module DynamicParameter
+    def dynamic_parameters
       { row_count: param.rows.count }
     end
   end

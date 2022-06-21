@@ -70,7 +70,7 @@ class CsvGenerator
 
   def encoding
     return Encoding::SHIFT_JIS if param.include?(:shift_jis)
-    return Encoding::WINDOWS_31J if param.include?(:win31j)
+    return Encoding::WINDOWS_31J if param.include?(:windows31j)
 
     Encoding::UTF_8
   end
@@ -79,7 +79,7 @@ class CsvGenerator
   def set_default
     param.merge!({ header: true }) unless param.include?(:header)
     param.merge!({ row_count: 10 }) unless param.include?(:row_count)
-    param.merge!({ filename: 'rollout.csv' }) unless param.include?(:filename)
+    param.merge!({ filename: "#{name}.csv" }) unless param.include?(:filename)
     param.merge!({ start_id: 0 }) unless param.include?(:start_id)
     param.merge!({ separator: ',' }) unless param.include?(:separator)
     param.merge!({ quotes: false }) unless param.include?(:quotes)
