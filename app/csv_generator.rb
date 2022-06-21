@@ -5,7 +5,7 @@
 class CsvGenerator
   require_relative 'csv_generator/column'
   require_relative 'csv_generator/row'
-  require_relative 'csv_generator/exp'
+  require_relative 'csv_generator/dynamic_parameter'
   require_relative 'csv_generator/param'
 
   attr_reader :param, :rows, :name
@@ -21,7 +21,7 @@ class CsvGenerator
     configs(name).sort.each do |yaml_path|
       config = YAML.load(File.read(yaml_path), symbolize_names: true)
       new(name, config, options)
-        .built_in    # expを内蔵
+        .built_in    # dynamic_parameterを内蔵
         .set_default # set deafaluts
         .build       # make rows
         .generate    # 出力
@@ -34,8 +34,8 @@ class CsvGenerator
       prepend(generator.constantize) if generator.safe_constantize
     end
 
-    "#{name.camelize}::Exp".tap do |exp|
-      Exp.prepend(exp.constantize) if exp.safe_constantize
+    "#{name.camelize}::DynamicParameter".tap do |dynamic_parameter|
+      DynamicParameter.prepend(dynamic_parameter.constantize) if dynamic_parameter.safe_constantize
     end
 
     "#{name.camelize}::Row".tap do |row|
@@ -63,7 +63,7 @@ class CsvGenerator
   end
 
   def built_in
-    Param.merge!(Exp.new.exps || {})
+    Param.merge!(DynamicParameter.new.dynamic_parameters || {})
 
     self
   end
@@ -84,7 +84,7 @@ class CsvGenerator
     param.merge!({ separator: ',' }) unless param.include?(:separator)
     param.merge!({ quotes: false }) unless param.include?(:quotes)
     param.merge!({ bom: false }) unless param.include?(:bom)
-    param.merge!({ encoding: encoding }) unless param.include?(:encoding)
+    param.merge!({ encoding: }) unless param.include?(:encoding)
 
     self
   end

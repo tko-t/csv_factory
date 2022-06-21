@@ -1,5 +1,5 @@
 class CsvGenerator
-  class Exp
+  class DynamicParameter
     attr_reader :param
 
     def initialize
@@ -7,7 +7,7 @@ class CsvGenerator
     end
 
     # overwritten
-    def exps
+    def dynamic_parameters
       {}
     end
   end
