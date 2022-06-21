@@ -19,24 +19,19 @@ line/foo_bar
 ├── column.rb
 ├── configs
 │   └── config.yml
-├── dynamic_parameter.rb
+├── exp.rb
 └── row.rb
 ```
 
 * 定義したCSVを出力する
 ```sh
 $ docker-compose run --rm app factory foo_bar
-$ tree line/foo_bar
-line/foo_bar
-├── column.rb
-├── configs
-│   └── config.yml
-├── csv
-│   └── foobar.csv   <= new!
-├── dynamic_parameter.rb
-└── row.rb
+$ tree csv
+csv
+└── foo_bar
+    └── foo_bar.csv <= new!
 
-$ cat line/foo_bar/csv/FooBar.csv
+$ cat csv/foo_bar/foo_bar.csv
 ID,Name
 1,山下 大輔
 2,石田 芽衣

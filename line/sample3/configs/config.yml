@@ -1,0 +1,13 @@
+filename: Sample3.csv # ../csv/Sample3.csv
+start_id: 1            # column#_id => 1, 2, 3, 4, 5.....
+row_count: 10
+header: true
+separator: ","
+quotes: false
+
+columns:
+  id: ID
+  name: 名前
+  address: 住所
+  birthday: 誕生日
+  age: 年齢

@@ -1,6 +1,5 @@
 FROM ruby:3.1-alpine
 
-# 引数
 ARG APP_NAME
 ARG WORKDIR
 ARG USER_NAME=$APP_NAME
@@ -25,8 +24,7 @@ RUN apk update && \
         mysql-client \
         mysql-dev \
         nodejs \
-        tzdata \
-        yarn && \
+        tzdata && \
     apk add --virtual build-packs --no-cache \
         build-base \
         curl-dev && \
